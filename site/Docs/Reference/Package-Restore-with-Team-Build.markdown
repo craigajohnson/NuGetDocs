@@ -154,3 +154,22 @@ In the TF version control template the project is selected via the property `1. 
 ![Build Process for TFVC](images/PackageRestoreTeamBuildTFVC.png)
 
 In contrast to the git based template the TF version control supports pickers (the button on the right hand side with the three dots). So in order to avoid any typing errors we suggest you use them to select the project. 
+
+## Modifying a Team Foundation Build Template To Invoke NuGet Restore
+
+Another approach to invoking NuGet restore is to modify the Team Foundation Build Template to call NuGet.exe automatically for each solution to be built. This makes it possible to use Automatic Package Restore during development while ensuring that all packages are restored prior to the MSBuild step of the Team Foundation Build process.
+
+For this example, we'll modify the DefaultTemplate included with TFS.
+
+1. To begin, copy NuGet.exe to a known location in your build environment. This can be copied either to the same location on each build server or to a shared network location.
+1. Checkout the `DefaultTemplate.xx.y.xaml` file located in the `BuildProcessTemplates` folder in your TFS project. (The actual name will vary based on which version of TFS is installed).
+1. Double-click on the `DefaultTemplate.xx.y.xaml` file to edit.
+1. In the workflow, locate each instance of `Run MSBuild for Project` activity.
+1. Just prior to each MSBuild activity, insert an `InvokeProcess` activity from `Team Foundation Build Activities` in the toolbox. We'll be modifying this build activity to run NuGet.exe
+1. 
+
+
+
+
+
+
